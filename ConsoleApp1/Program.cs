@@ -27,14 +27,16 @@ namespace ConsoleApp1
             {
                 RequireExpirationTime = true,
                 RequireSignedTokens = true,
-                ValidateAudience = false,
-                ValidateIssuer = false,
+                ValidateAudience = true,
+                ValidateIssuer = true,
                 ValidateLifetime = false,
                 IssuerSigningKey = new RsaSecurityKey(rsa)
             };
 
             SecurityToken validatedSecurityToken = null;
             var handler = new JwtSecurityTokenHandler();
+            validationParameters.ValidAudience = @"s6BhdRkqt3";
+            validationParameters.ValidIssuer = @"http://server.example.com";
             handler.ValidateToken(tokenStr, validationParameters, out validatedSecurityToken);
             JwtSecurityToken validatedJwt = validatedSecurityToken as JwtSecurityToken;
         }
